@@ -1,5 +1,4 @@
-export const questions = [
-    {
+export var questions = [{
         question: '0Some Question',
         correctAnswer: 'a',
         a: 'answerA',
@@ -10,7 +9,7 @@ export const questions = [
 
     {
         question: '1Some Question',
-        correctAnswer: 'a',
+        correctAnswer: 'b',
         a: 'answerA',
         b: 'answerB',
         c: 'answerC',
@@ -19,7 +18,7 @@ export const questions = [
 
     {
         question: '2Some Question',
-        correctAnswer: 'a',
+        correctAnswer: 'c',
         a: 'answerA',
         b: 'answerB',
         c: 'answerC',
@@ -28,7 +27,7 @@ export const questions = [
 
     {
         question: '3Some Question',
-        correctAnswer: 'a',
+        correctAnswer: 'd',
         a: 'answerA',
         b: 'answerB',
         c: 'answerC',
@@ -44,8 +43,3 @@ export const questions = [
         d: 'answerD'
     },
 ]
-
-
-
-
-

@@ -1,15 +1,21 @@
 import { questions } from "./questions.js";
 
+var random = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
 
 export function askQuestion() {
-    let random = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
-    return questions[random]
+
+    console.log('Question: ' + questions[random].question +
+        '\n' + 'A: ' + questions[random].a +
+        '\n' + 'B: ' + questions[random].b +
+        '\n' + 'C: ' + questions[random].c +
+        '\n' + 'D: ' + questions[random].d);
 }
 
-function answerQuestion() {
+export function answerQuestion(answer) {
+    if (questions[random].correctAnswer == answer) {
+        return true;
+    } else {
+        return false;
+    }
 
 }
-
-
-
-
