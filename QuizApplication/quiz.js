@@ -1,21 +1,38 @@
-import { questions } from "./questions.js";
+import { getQuestions } from "./questions.js";
 
-var random = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
-
-export function askQuestion() {
-
-    console.log('Question: ' + questions[random].question +
-        '\n' + 'A: ' + questions[random].a +
-        '\n' + 'B: ' + questions[random].b +
-        '\n' + 'C: ' + questions[random].c +
-        '\n' + 'D: ' + questions[random].d);
+export async function askQuestion() {
+    try{
+        const responseQuestions = await getQuestions()
+        const question = responseQuestions   
+        const questionToAsk = {
+            question: question.question,
+            a: question.a,
+            b: question.b,
+            c: question.c,
+            d: question.d
+        }
+        const questionCorrectAnswer = {
+            correctAnswer: question.correctAnswer
+        }
+        console.log(questionToAsk)
+        return questionCorrectAnswer
+    } catch(err){
+        console.log(err)
+    }
 }
 
-export function answerQuestion(answer) {
-    if (questions[random].correctAnswer == answer) {
-        return true;
-    } else {
-        return false;
-    }
 
+export async function answerQuestion(questionCorrectAnswer, answer) {
+    try{ 
+        const responseCorrectAnswer = await questionCorrectAnswer
+        if(responseCorrectAnswer.correctAnswer == answer) {
+            console.log('Correct!')
+            return true
+        } else {
+            console.log(`False, correct answer: ${responseCorrectAnswer.correctAnswer}` )
+            return false
+        }
+    }catch(err){
+        console.log(err)
+    }
 }
