@@ -189,21 +189,31 @@
             </div>
             </section>
             `)
+            let choosen = ''
+            if(localStorage.getItem('choosen')){
+              choosen = localStorage.getItem('choosen')
+            }
             const correct = localStorage.getItem('correctAnswer');
-            const choosen = localStorage.getItem('choosen');
+   
 
             function callCorrect(){
               domElements.querySelector("h1").innerHTML = 'Deine Antwort ist richtig!'
             }
 
             function callFalse(){
-              domElements.querySelector("h1").innerHTML = 'Deine Antwort ist leider falsch..'
+              if(choosen === ''){
+                domElements.querySelector("h1").innerHTML = 'Das war wohl zu langsam..'
+              } else{
+                domElements.querySelector("h1").innerHTML = 'Deine Antwort ist leider falsch..'
+              }
             }
 
             answerQuestion(correct, choosen) ? callCorrect() : callFalse()
 
             domElements.querySelectorAll("h4")[0].innerHTML = 'Tatsächlich ist es: ', localStorage.getItem('letter');
             domElements.querySelectorAll("h4")[1].innerHTML = correct;
+
+            localStorage.setItem('choosen', '');
 
             return domElements
 
@@ -216,9 +226,9 @@
                 render(document.getElementById('content'), startTemplate())
             } else if (pathname === '/question') {
                 render(document.getElementById('content'), questionTemplate())
-                // setTimeout(() => {
-                //     window.location.href = 'http://localhost:8080/answer';
-                // }, 10800)
+                setTimeout(() => {
+                    window.location.href = 'http://localhost:8080/answer';
+                }, 10800)
             } else if (pathname === '/answer') {
                 render(document.getElementById('content'), answerTemplate())
             } else {
