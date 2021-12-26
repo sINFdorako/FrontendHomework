@@ -1,54 +1,54 @@
 import { delay } from "./delay.js"
 
 export const questions = [{
-        question: '0Some Question',
-        correctAnswer: 'a',
-        a: 'answerA',
-        b: 'answerB',
-        c: 'answerC',
-        d: 'answerD'
+        question: 'Das flächenmäßig kleinste Bundesland heißt ...',
+        correctAnswer: 'B: ...Bremen',
+        a: '...Berlin',
+        b: '...Bremen',
+        c: '...Saarland',
+        d: '...Hamburg'
     },
 
     {
-        question: '1Some Question',
-        correctAnswer: 'b',
-        a: 'answerA',
-        b: 'answerB',
-        c: 'answerC',
-        d: 'answerD'
+        question: 'Was bedeutet das lateinische "carpe diem" ?',
+        correctAnswer: 'A: Nutze den Tag.',
+        a: 'Nutze den Tag.',
+        b: 'Genieße das Leben.',
+        c: 'Dein Tag wird toll werden.',
+        d: 'Man sieht sich immer zwei mal im Leben.'
     },
 
     {
-        question: '2Some Question',
-        correctAnswer: 'c',
-        a: 'answerA',
-        b: 'answerB',
-        c: 'answerC',
-        d: 'answerD'
+        question: 'Was ist die "Goldene Himbeere"?',
+        correctAnswer: 'A: ein Preis für die schlechteste Leistung innerhalb eines Filmjahres',
+        a: 'ein Preis für die schlechteste Leistung innerhalb eines Filmjahres',
+        b: 'eine Nachspeise aus Russland',
+        c: 'das teuerste Schmuckstück der Welt',
+        d: 'das Symbol einer Sekte'
     },
 
     {
-        question: '3Some Question',
-        correctAnswer: 'd',
-        a: 'answerA',
-        b: 'answerB',
-        c: 'answerC',
-        d: 'answerD'
+        question: 'Welcher deutsche Herrscher trug den Beinamen "der Große"?',
+        correctAnswer: 'B: Friedrich II. von Preußen',
+        a: 'Friedrich der I. von Preußen',
+        b: 'Friedrich II. von Preußen',
+        c: 'Friedrich der III. von Sachsen',
+        d: 'Friedrich der III. von Österreich'
     },
 
     {
-        question: '4Some Question',
-        correctAnswer: 'a',
-        a: 'answerA',
-        b: 'answerB',
-        c: 'answerC',
-        d: 'answerD'
+        question: 'Welcher Pilz ist einer der giftigsten der Welt?',
+        correctAnswer: 'A: der Grüne Knollenblätterpilz',
+        a: 'der Grüne Knollenblätterpilz',
+        b: 'der Fliegenpilz',
+        c: 'der Gemeine Kartoffelbovist',
+        d: 'der Satansröhrling'
     },
 ]
 
 export const getQuestions = async () => {
     await delay()
-    let random = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+    let random = Math.floor(Math.random() * (4 - 1 + 1)) + 0;
    
     return questions[random]
 }

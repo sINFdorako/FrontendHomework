@@ -21,7 +21,6 @@ export async function askQuestion() {
     }
 }
 
-
 export async function answerQuestion(questionCorrectAnswer, answer) {
     try{ 
         const responseCorrectAnswer = await questionCorrectAnswer

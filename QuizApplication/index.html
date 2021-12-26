@@ -16,87 +16,176 @@
         background-color:aliceblue;
       }
       a{text-align: center;}
+      .center{
+        text-align: center;
+      }
+      li{
+        list-style-type:none;
+        font-size: 1.5em;
+      }
+      h4{
+        font-size: 2em;
+        color: rgba(0, 0, 0, 0.678);
+      }
+      h3{
+          color: rgba(77, 77, 77, 0.761);
+      }
+      .question-container{
+        width: 80%;
+        height: 80%;
+        padding: 2em;
+        background-color: aliceblue;
+        border: 1px solid rgba(92, 92, 92, 0.035);
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.124);
+        margin-bottom: 2em;
+      }
+      #startLink{
+        background-color: transparent;
+        padding: 1em;
+        font-size: 1.5em;
+        text-decoration: none;
+        border: 1px solid rgba(92, 92, 92, 0.391);;
+        color: black;
+        border-radius: 10px 10px 10px 10px;
+      }
+      #startLink:hover{
+        color: white;
+        background-color:rgba(0, 0, 0, 0.678)
+      }
     </style>
   </head>
   <body>
-    <div id="app" class="container">
-      <div class="row">
-        <h1 class="col-12 mt-5 mb-4 center">Quiz App</h1>
-        <a class="col-12" href="#/questions">Start Quiz</a>
-      </div>
-    </div>
-    <script type=module>
-      const html = (templateString) => {
-          return new DOMParser()
-          .parseFromString(templateString, 'text/html')
-          .body
-          const render = (nodeToRenderTo, nodeToRender) => {
-          nodeToRenderTo.innerHTML = ''
-          nodeToRenderTo.appendChild(nodeToRender)
+      <section id="content"></section>
+
+      <script type="module">
+        const html = (templateString) => {
+            return new DOMParser()
+                .parseFromString(templateString, 'text/html')
+                .body
         }
-      }
 
-    const HomeComponent = {
-      render: () => {
-        return `
-          <section id="app">
-            <h1 class="col-12 mt-5 mb-4 center">Quiz App</h1>
-            <a class="col-12" href="#/questions">Start Quiz</a>
-          </section>
-        `;
-      }
-    }
+        const render = (nodeToRenderTo, nodeToRender) => {
+            nodeToRenderTo.innerHTML = ''
+            nodeToRenderTo.appendChild(nodeToRender)
+        }
 
-    import { getQuestions } from "./questions.js";
-    const QuestionsComponent = {
-      render: async () => {
-        const domElements = html(`
-        <section id="app">
-              <h1 class="col-12 mt-5 mb-4 center">Questions</h1>
-              <p id="questionsArea"></p>
-        </section>
-        `)
+        const startTemplate = () => {
+            const domElements = html(`
+            <section>
+            <h1 class="mb-5 mt-5">Willkommen zum Quiz Game</h1>
+            <div class="container center">
+                <a id="startLink" href="/question">Start</a>
+            </div>
+            </section>
+            `)
 
-      let getQuestion = async () => {
-        const responseQuestions = await getQuestions()
-        const question = responseQuestions 
-        const questionToAsk = {
-          question: question.question,
-          a: question.a,
-          b: question.b,
-          c: question.c,
-          d: question.d
-          }
-        return questionToAsk   
-      }
-      
-      let randomQuestion = await getQuestion()
-      console.log(randomQuestion)
-      
-      domElements.lastElementChild.innerHTML = JSON.stringify(randomQuestion)
+            return domElements
+        }
 
-      return domElements.outerHTML
-      }
-    }
-    
-    const routes = [
-      {  path: '/', component: HomeComponent, },
-      {  path: '/questions', component: QuestionsComponent, }
-    ]
+        import { getQuestions } from "./questions.js";
+        const questionTemplate = () => {
+            const domElements = html(`
+            <section>
+            <h1 class="mb-5 mt-5">Quiz Frage</h1>
+            <div class="container question-container">
+            <h4 class="mt-3 center"></h4>
+            <hr />
+            <ul class="center" class="mt-5">
+                <li>A: </li>
+                <li>B: </li>
+                <li>C: </li>
+                <li>D: </li>
+            </ul>
+            <h3></h3>
+            </div>
+            </section>
+            `)
 
-    const parseLocation = () => location.hash.slice(1).toLowerCase()
-    const findComponentByPath = (path, routes) => routes.find(r => r.path.match(new RegExp(`^\\${path}$`, 'gm'))) || undefined;
+          let getQuestion = async () => {
+            const responseQuestions = await getQuestions()
+            const question = responseQuestions
+            const correct = question.correctAnswer;
+            console.log(correct)
+            localStorage.setItem('correctAnswer', correct);
+            const questionToAsk = {
+            question: question.question,
+            a: question.a,
+            b: question.b,
+            c: question.c,
+            d: question.d
+            }
+          return questionToAsk   
+        }
 
-    const router = () => {
-      const path = parseLocation();
-      const { component = HomeComponent } = findComponentByPath(path, routes) || {};
-      if(document.getElementById("app").innerHTML){
-        document.getElementById("app").innerHTML = component.render();
-      }
-    }
+        let timeleft = 10;
+        let downloadTimer = setInterval(function(){
+        if(timeleft <= 0){
+            clearInterval(downloadTimer);
+            domElements.querySelector("h3").innerHTML = "Zeit ist aus";
+        } else {
+            domElements.querySelector("h3").innerHTML = timeleft + " Sekunden verbleibend";
+        }
+        timeleft -= 1;
+        }, 1000);
 
-    window.addEventListener('hashchange', router);
-    window.addEventListener('load', router);
-    </script>
+
+        (async() => {
+          let randomQuestion = await getQuestion()
+          domElements.querySelector('h4').innerHTML = randomQuestion.question
+          domElements.querySelectorAll('li')[0].innerHTML = 'A: ' +randomQuestion.a
+          domElements.querySelectorAll('li')[1].innerHTML = 'B: ' +randomQuestion.b
+          domElements.querySelectorAll('li')[2].innerHTML = 'C: ' +randomQuestion.c
+          domElements.querySelectorAll('li')[3].innerHTML = 'D: ' +randomQuestion.d
+        })();
+
+        return domElements
+
+        
+        }
+
+        const answerTemplate = () => {
+            const domElements = html(`
+            <section>
+            <h1 class="mb-5 mt-5">Die richtige Antwort lautet: </h1>
+ 
+            <div class="container center">
+                <h4 class="mb-5"></h4>
+                <a id="startLink" href="/">Startseite</a>
+            </div>
+            </section>
+            `)
+            domElements.querySelector("h4").innerHTML = localStorage.getItem('correctAnswer').toUpperCase();
+
+            return domElements
+
+        }
+
+        const onRouteChange = () => {
+        const pathname = new URL(window.location).pathname;
+        const domElement = document.querySelector('#content')
+            if (pathname === '/') {
+                render(document.getElementById('content'), startTemplate())
+            } else if (pathname === '/question') {
+                render(document.getElementById('content'), questionTemplate())
+                setTimeout(() => {
+                    window.location.href = 'http://localhost:8080/answer';
+                }, 10800)
+            } else if (pathname === '/answer') {
+                render(document.getElementById('content'), answerTemplate())
+            } else {
+                domElement.innerHTML = 'not found =('
+            }
+        }
+        onRouteChange() // call on page load
+
+        Array.from(document.querySelectorAll('a')).forEach((link) => {
+            document.addEventListener('click', (evt) => {
+                evt.preventDefault()
+                history.pushState(null, "My new page", evt.target.href)
+                onRouteChange()
+            })
+        })
+      </script>
   </body>
 </html>
