@@ -21,17 +21,18 @@ export async function askQuestion() {
     }
 }
 
-export async function answerQuestion(questionCorrectAnswer, answer) {
+export function answerQuestion(correctAnswer, answer) {
     try{ 
-        const responseCorrectAnswer = await questionCorrectAnswer
-        if(responseCorrectAnswer.correctAnswer == answer) {
-            console.log('Correct!')
+        if(correctAnswer === answer) {
+            console.log('Deine Antwort ist korrekt!')
             return true
         } else {
-            console.log(`False, correct answer: ${responseCorrectAnswer.correctAnswer}` )
+            console.log(`Deine Antwort war leider falsch, richtig wäre: ${correctAnswer}` )
             return false
         }
     }catch(err){
         console.log(err)
     }
 }
+
+console.log(answerQuestion('ein Preis für die schlechteste Leistung innerhalb eines Filmjahres', 'ein Preis für die schlechteste Leistung innerhalb eines Filmjahres') ? 'True' : 'False')

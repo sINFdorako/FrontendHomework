@@ -2,7 +2,7 @@ import { delay } from "./delay.js"
 
 export const questions = [{
         question: 'Das flächenmäßig kleinste Bundesland heißt ...',
-        correctAnswer: 'B: ...Bremen',
+        correctAnswer: '...Bremen',
         a: '...Berlin',
         b: '...Bremen',
         c: '...Saarland',
@@ -11,7 +11,7 @@ export const questions = [{
 
     {
         question: 'Was bedeutet das lateinische "carpe diem" ?',
-        correctAnswer: 'A: Nutze den Tag.',
+        correctAnswer: 'Nutze den Tag.',
         a: 'Nutze den Tag.',
         b: 'Genieße das Leben.',
         c: 'Dein Tag wird toll werden.',
@@ -20,7 +20,7 @@ export const questions = [{
 
     {
         question: 'Was ist die "Goldene Himbeere"?',
-        correctAnswer: 'A: ein Preis für die schlechteste Leistung innerhalb eines Filmjahres',
+        correctAnswer: 'ein Preis für die schlechteste Leistung innerhalb eines Filmjahres',
         a: 'ein Preis für die schlechteste Leistung innerhalb eines Filmjahres',
         b: 'eine Nachspeise aus Russland',
         c: 'das teuerste Schmuckstück der Welt',
@@ -29,7 +29,7 @@ export const questions = [{
 
     {
         question: 'Welcher deutsche Herrscher trug den Beinamen "der Große"?',
-        correctAnswer: 'B: Friedrich II. von Preußen',
+        correctAnswer: 'Friedrich II. von Preußen',
         a: 'Friedrich der I. von Preußen',
         b: 'Friedrich II. von Preußen',
         c: 'Friedrich der III. von Sachsen',
@@ -38,7 +38,7 @@ export const questions = [{
 
     {
         question: 'Welcher Pilz ist einer der giftigsten der Welt?',
-        correctAnswer: 'A: der Grüne Knollenblätterpilz',
+        correctAnswer: 'der Grüne Knollenblätterpilz',
         a: 'der Grüne Knollenblätterpilz',
         b: 'der Fliegenpilz',
         c: 'der Gemeine Kartoffelbovist',

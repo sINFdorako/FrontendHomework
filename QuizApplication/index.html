@@ -22,6 +22,15 @@
       li{
         list-style-type:none;
         font-size: 1.5em;
+        cursor: pointer;
+      }
+      li:hover{
+        color: white;
+        background-color:rgba(0, 0, 0, 0.678);
+        padding: .2em;
+        transition: .3s;
+        border: 1px solid lightgoldenrodyellow;
+        border-radius: 10px 10px 10px 10px;
       }
       h4{
         font-size: 2em;
@@ -129,33 +138,72 @@
         timeleft -= 1;
         }, 1000);
 
+        async function getAllQuestions(){
+            let randomQuestion = await getQuestion()
+            domElements.querySelector('h4').innerHTML = randomQuestion.question
+            domElements.querySelectorAll('li')[0].innerHTML = 'A: ' +randomQuestion.a
+            domElements.querySelectorAll('li')[1].innerHTML = 'B: ' +randomQuestion.b
+            domElements.querySelectorAll('li')[2].innerHTML = 'C: ' +randomQuestion.c
+            domElements.querySelectorAll('li')[3].innerHTML = 'D: ' +randomQuestion.d
 
-        (async() => {
-          let randomQuestion = await getQuestion()
-          domElements.querySelector('h4').innerHTML = randomQuestion.question
-          domElements.querySelectorAll('li')[0].innerHTML = 'A: ' +randomQuestion.a
-          domElements.querySelectorAll('li')[1].innerHTML = 'B: ' +randomQuestion.b
-          domElements.querySelectorAll('li')[2].innerHTML = 'C: ' +randomQuestion.c
-          domElements.querySelectorAll('li')[3].innerHTML = 'D: ' +randomQuestion.d
-        })();
-
-        return domElements
-
+            domElements.querySelectorAll('li')[0].addEventListener('click', () => {
+                localStorage.setItem('choosen', randomQuestion.a)
+                localStorage.setItem('letter', 'A')
+                window.location.href = 'http://localhost:8080/answer';
+            })
+            domElements.querySelectorAll('li')[1].addEventListener('click', () => {
+                localStorage.setItem('choosen', randomQuestion.b)
+                localStorage.setItem('letter', 'B')
+                window.location.href = 'http://localhost:8080/answer';
+            })
+            domElements.querySelectorAll('li')[2].addEventListener('click', () => {
+                localStorage.setItem('choosen', randomQuestion.c)
+                localStorage.setItem('letter', 'C')
+                window.location.href = 'http://localhost:8080/answer';
+            })
+            domElements.querySelectorAll('li')[3].addEventListener('click', () => {
+                localStorage.setItem('choosen', randomQuestion.d)
+                localStorage.setItem('letter', 'D')
+                window.location.href = 'http://localhost:8080/answer';
+            })
         
         }
+        
+        getAllQuestions();
+        
+        return domElements
 
+        }
+
+        import { answerQuestion } from '/quiz.js'
         const answerTemplate = () => {
             const domElements = html(`
             <section>
-            <h1 class="mb-5 mt-5">Die richtige Antwort lautet: </h1>
+            <h1 class="mb-5 mt-5"></h1>
  
-            <div class="container center">
+            <div class="container center"> 
+                <h2></h2> 
+                <h4 class="mb-2"></h4>
                 <h4 class="mb-5"></h4>
                 <a id="startLink" href="/">Startseite</a>
             </div>
             </section>
             `)
-            domElements.querySelector("h4").innerHTML = localStorage.getItem('correctAnswer').toUpperCase();
+            const correct = localStorage.getItem('correctAnswer');
+            const choosen = localStorage.getItem('choosen');
+
+            function callCorrect(){
+              domElements.querySelector("h1").innerHTML = 'Deine Antwort ist richtig!'
+            }
+
+            function callFalse(){
+              domElements.querySelector("h1").innerHTML = 'Deine Antwort ist leider falsch..'
+            }
+
+            answerQuestion(correct, choosen) ? callCorrect() : callFalse()
+
+            domElements.querySelectorAll("h4")[0].innerHTML = 'Tatsächlich ist es: ', localStorage.getItem('letter');
+            domElements.querySelectorAll("h4")[1].innerHTML = correct;
 
             return domElements
 
@@ -168,9 +216,9 @@
                 render(document.getElementById('content'), startTemplate())
             } else if (pathname === '/question') {
                 render(document.getElementById('content'), questionTemplate())
-                setTimeout(() => {
-                    window.location.href = 'http://localhost:8080/answer';
-                }, 10800)
+                // setTimeout(() => {
+                //     window.location.href = 'http://localhost:8080/answer';
+                // }, 10800)
             } else if (pathname === '/answer') {
                 render(document.getElementById('content'), answerTemplate())
             } else {
