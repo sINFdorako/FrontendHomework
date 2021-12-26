@@ -47,16 +47,10 @@ export const questions = [{
 ]
 
 export const getQuestions = async () => {
-    const delayResponse = await delay()
+    await delay()
     let random = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
-    return new Promise((resolve, reject) => {
-        if(questions != null){
-            delayResponse
-            resolve(questions[random])
-        } else {
-            reject()
-        }
-    })
+   
+    return questions[random]
 }
 
 

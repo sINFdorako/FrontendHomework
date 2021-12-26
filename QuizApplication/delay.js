@@ -1,5 +1,5 @@
 export const delay = (() => {
-    new Promise((resolve, reject) => {
+   return new Promise((resolve, reject) => {
         if (delay === 0) {
             reject()
         } else {
