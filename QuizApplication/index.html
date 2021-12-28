@@ -8,27 +8,28 @@
   </head>
   <body>
       <section id="content"></section>
+      <script type="text/javascript" src="startTemplate.js"></script>
       <script type="module">
         import { html } from '/components/html.js'
         import { render } from '/components/render.js'
-        
+
         const startTemplate = () => {
-            const domElements = html(`
-            <section>
-            <div>
-              <h1 class="underLink mb-5 mt-5">Willkommen zum Quiz Game</h1>
-                <div class="container center parentDivLottie">
-                    <lottie-player id="lottieStart" src="https://assets3.lottiefiles.com/packages/lf20_zq1epbqc.json" background="transparent" speed="1"  style="width: 250px; height: 250px;" loop autoplay></lottie-player>
-                </div>
-            </div>
-            </section>
-            `)
+          const domElements = html(`
+          <section>
+          <div>
+            <h1 class="underLink mb-5 mt-5">Willkommen zum Quiz Game</h1>
+              <div class="container center parentDivLottie">
+                  <lottie-player id="lottieStart" src="https://assets3.lottiefiles.com/packages/lf20_zq1epbqc.json" background="transparent" speed="1"  style="width: 250px; height: 250px;" loop autoplay></lottie-player>
+              </div>
+          </div>
+          </section>
+          `)
 
             domElements.querySelector('lottie-player').addEventListener('click', () => {
                 window.location.href = 'http://localhost:8080/question';
             })
 
-            return domElements
+          return domElements
         }
 
         import { askQuestion } from "./quiz.js";
@@ -102,7 +103,7 @@
         return domElements
 
         }
-        
+
         import { answerQuestion } from '/quiz.js'
         const answerTemplate = () => {
             const domElements = html(`
