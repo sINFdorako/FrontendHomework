@@ -208,7 +208,7 @@ export const getQuestions = async () => {
     await delay()
     let random = Math.floor(Math.random() * (questions.length - 1 + 1)) + 0;
     if(localStorage.getItem('randomNumber')){
-        console.log('randomNumber already exists')
+        console.log('randomNumber already exists in localStorage')
         if(random == localStorage.getItem('randomNumber')){
             random = Math.floor(Math.random() * (questions.length - 1 + 1)) + 0;
         }
