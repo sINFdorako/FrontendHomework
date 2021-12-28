@@ -22,6 +22,8 @@
                   <lottie-player id="lottieStart" src="https://assets3.lottiefiles.com/packages/lf20_zq1epbqc.json" background="transparent" speed="1"  style="width: 250px; height: 250px;" loop autoplay></lottie-player>
               </div>
           </div>
+          <audio autoplay></audio>
+          <audio autoplay><source src="/assets/intro.mp3" type="audio/ogg"></audio>
           </section>
           `)
 
@@ -53,6 +55,7 @@
               </div>
             </div>
             </div>
+            <audio autoplay><source src="/assets/game_sound.mp3" type="audio/ogg"></audio>
             </section>
             `)
 
@@ -110,6 +113,7 @@
             <section>
             <h1 class="mb-5 mt-5"></h1>
             <div></div>
+            <audio autoplay></audio>
             <div class="container center"> 
                 <h2></h2> 
                 <h4 class="mb-2"></h4>
@@ -126,19 +130,21 @@
             const correct = localStorage.getItem('correctAnswer');
    
 
-            function callCorrect(){
+            function callCorrect(){             
               domElements.querySelector("h1").innerHTML = 'Deine Antwort ist richtig!'
-              domElements.querySelectorAll("div")[0].innerHTML = '<div class="parentDivLottie"><div id="successLottie"  class="childDivLottie"><lottie-player src="https://assets5.lottiefiles.com/temp/lf20_MqU2rh.json" background="transparent"  speed="1.5"  style="width: 250px; height: 250px;" autoplay></lottie-player></div></div>'
+              domElements.querySelectorAll("div")[0].innerHTML = '<div class="parentDivLottie"><div id="successLottie"  class="childDivLottie"><lottie-player src="https://assets5.lottiefiles.com/temp/lf20_MqU2rh.json" background="transparent"  speed="5"  style="width: 250px; height: 250px;" autoplay></lottie-player></div></div>'
+              domElements.querySelector("audio").innerHTML = '<source src="/assets/success.mp3" type="audio/ogg">'
             }
 
             function callFalse(){
               if(choosen === ''){
                 domElements.querySelector("h1").innerHTML = 'Das war wohl zu langsam..'
                 domElements.querySelectorAll("div")[0].innerHTML = '<div class="parentDivLottie"><div id="slowLottie"  class="childDivLottie"><lottie-player id="slowLottie" src="https://assets2.lottiefiles.com/packages/lf20_jryyrscd.json" background="transparent"  speed="1"  style="width: 350px; height: 350px;" autoplay></lottie-player></div></div>'
+                domElements.querySelector("audio").innerHTML = '<source src="/assets/tuba.mp3" type="audio/ogg">'
               } else{
                 domElements.querySelector("h1").innerHTML = 'Deine Antwort ist leider falsch..'
-                domElements.querySelectorAll("div")[0].innerHTML = '<div class="parentDivLottie"><div id="failLottie"  class="childDivLottie"><lottie-player id="failLottie" src="https://assets5.lottiefiles.com/private_files/lf30_jq4i7W.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" autoplay></lottie-player></div></div>'
-                
+                domElements.querySelectorAll("div")[0].innerHTML = '<div class="parentDivLottie"><div id="failLottie"  class="childDivLottie"><lottie-player id="failLottie" src="https://assets5.lottiefiles.com/private_files/lf30_jq4i7W.json" background="transparent"  speed="3"  style="width: 300px; height: 300px;" autoplay></lottie-player></div></div>'
+                domElements.querySelector("audio").innerHTML = '<source src="/assets/fail.mp3" type="audio/ogg">'
               }
             }
 
