@@ -1,0 +1,110 @@
+h1{
+    text-align: center;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  button{
+    padding: .8em !important;
+    font-size: 1.5em !important;
+  }
+  body{
+    background-color:rgba(0, 0, 0, 0.637);
+    background-image: url('/assets/quiz_background.png');
+    background-attachment: inherit;
+    background-blend-mode: soft-light;
+    background-position: top center;
+  }
+  a{text-align: center;}
+  .center{
+    text-align: center;
+  }
+  li{
+    list-style-type:none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  li:hover{
+    color: white;
+    background-color:rgba(4, 0, 255, 0.678);
+    transform: translate3d(5%);
+    transition: .3s;
+    border: 1px solid rgba(250, 250, 210, 0.322);
+    border-radius: 10px 10px 10px 10px;
+  }
+  h4{
+    font-size: 2em;
+    color: rgba(255, 255, 255, 0.87);
+  }
+  h3{
+      color: rgba(255, 255, 255, 0.87);
+  }
+  hr{
+    color: white;
+  }
+  .question-container{
+    width: 80%;
+    height: 80%;
+    padding: 2em;
+    background-color: rgba(51, 60, 192, 0.432);
+    border: 1px solid rgba(92, 92, 92, 0.035);
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 1px 1px 1px rgba(51, 60, 192, 0.432);
+    margin-bottom: 2em;
+  }
+  #startLink{
+    background-color: rgba(51, 60, 192, 0.432);
+    padding: 2em;
+    font-size: 1.5em;
+    text-decoration: none;
+    border: 1px solid rgba(92, 92, 92, 0.391);
+    color: rgba(255, 255, 255, 0.87);
+    border-radius: 10px 10px 10px 10px;
+  }
+  #startLink:hover{
+    color: white;
+    background-color:rgba(69, 81, 248, 0.678);
+    padding: 2.2em;
+    transition: .3s;
+  }
+  .underLink{
+    margin-bottom: 3em !important;
+  }
+  .parentDivLottie{
+    position: relative;
+  }
+  #lottieStart{
+    left: 40%;
+    cursor: pointer;
+    position: absolute;
+  }
+  #lottieStart:hover{
+    background-color: transparent;
+    width: 80%;
+    border: 1px solid rgba(25, 12, 200, 0.035);
+    border-radius: 120px 120px 120px 120px;
+    box-shadow: 20px 20px 20px rgba(51, 60, 192, 0.432);
+    transition: .3s;
+  }
+  #countdown{
+    margin-top: .99em;
+  }
+
+  #lottieTime{
+    margin-left: -8em;
+    margin-top: -.4em;
+  }
+
+  .childDivLottie{
+    position: relative;
+  }
+
+  #successLottie{
+    left: 42%;
+  }
+  #failLottie{
+    left: 40%;
+  }
+  #slowLottie{
+    left: 37%;
+    margin-bottom: -2em;
+  }

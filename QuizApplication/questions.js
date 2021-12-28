@@ -90,7 +90,7 @@ export const questions = [{
     },
     {
         question: 'Welches dieser Tiere hält keinen Winterschlaf?',
-        correctAnswer: 'Eichörnchen',
+        correctAnswer: 'Eichhörnchen',
         a: 'Eichhörnchen',
         b: 'Fledermaus',
         c: 'Igel',

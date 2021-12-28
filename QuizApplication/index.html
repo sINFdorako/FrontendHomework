@@ -2,113 +2,36 @@
 <html>
   <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link href="/styles.css" rel="stylesheet">
     <title>Quiz App</title>
-    <style>
-      h1{
-        text-align: center;
-        color: rgba(255, 255, 255, 0.87);
-      }
-      button{
-        padding: .8em !important;
-        font-size: 1.5em !important;
-      }
-      body{
-        background-color:rgba(0, 0, 0, 0.637);
-        background-image: url('/assets/quiz_background.png');
-        background-attachment: inherit;
-        background-blend-mode: soft-light;
-        background-position: top center;
-      }
-      a{text-align: center;}
-      .center{
-        text-align: center;
-      }
-      li{
-        list-style-type:none;
-        font-size: 1.5em;
-        cursor: pointer;
-        color: rgba(255, 255, 255, 0.87);
-      }
-      li:hover{
-        color: white;
-        background-color:rgba(4, 0, 255, 0.678);
-        /* transform: scale(101%); */
-        transform: translate3d(5%);
-        transition: .3s;
-        border: 1px solid rgba(250, 250, 210, 0.322);
-        border-radius: 10px 10px 10px 10px;
-      }
-      h4{
-        font-size: 2em;
-        color: rgba(255, 255, 255, 0.87);
-      }
-      h3{
-          color: rgba(255, 255, 255, 0.87);
-      }
-      hr{
-        color: white;
-      }
-      .question-container{
-        width: 80%;
-        height: 80%;
-        padding: 2em;
-        background-color: rgba(51, 60, 192, 0.432);
-        border: 1px solid rgba(92, 92, 92, 0.035);
-        border-radius: 10px 10px 10px 10px;
-        box-shadow: 1px 1px 1px rgba(51, 60, 192, 0.432);
-        margin-bottom: 2em;
-      }
-      #startLink{
-        background-color: rgba(51, 60, 192, 0.432);
-        padding: 2em;
-        font-size: 1.5em;
-        text-decoration: none;
-        border: 1px solid rgba(92, 92, 92, 0.391);
-        color: rgba(255, 255, 255, 0.87);
-        border-radius: 10px 10px 10px 10px;
-      }
-      #startLink:hover{
-        color: white;
-        background-color:rgba(69, 81, 248, 0.678);
-        padding: 2.2em;
-        transition: .3s;
-      }
-      .underLink{
-        margin-bottom: 3em !important;
-      }
-    </style>
   </head>
   <body>
       <section id="content"></section>
-
       <script type="module">
-        const html = (templateString) => {
-            return new DOMParser()
-                .parseFromString(templateString, 'text/html')
-                .body
-        }
-
-        const render = (nodeToRenderTo, nodeToRender) => {
-            nodeToRenderTo.innerHTML = ''
-            nodeToRenderTo.appendChild(nodeToRender)
-        }
-
+        import { html } from '/components/html.js'
+        import { render } from '/components/render.js'
+        
         const startTemplate = () => {
             const domElements = html(`
             <section>
             <div>
               <h1 class="underLink mb-5 mt-5">Willkommen zum Quiz Game</h1>
-              <div class="container center">
-                  <a id="startLink" href="/question">Start</a>
-              </div>
+                <div class="container center parentDivLottie">
+                    <lottie-player id="lottieStart" src="https://assets3.lottiefiles.com/packages/lf20_zq1epbqc.json" background="transparent" speed="1"  style="width: 250px; height: 250px;" loop autoplay></lottie-player>
+                </div>
             </div>
             </section>
             `)
 
+            domElements.querySelector('lottie-player').addEventListener('click', () => {
+                window.location.href = 'http://localhost:8080/question';
+            })
+
             return domElements
         }
 
-        import { getQuestions } from "./questions.js";
+        import { askQuestion } from "./quiz.js";
         const questionTemplate = () => {
             const domElements = html(`
             <section>
@@ -122,26 +45,15 @@
                 <li>C: </li>
                 <li>D: </li>
             </ul>
-            <h3></h3>
+            <div class="parentDivLottie">
+              <div class="row childDivLottie">
+                <h3 class="col-3" id="countdown"></h3>
+                <lottie-player class="col-1" id="lottieTime" src="https://assets3.lottiefiles.com/packages/lf20_7u76gktw.json" background="transparent" speed="1"  style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+              </div>
+            </div>
             </div>
             </section>
             `)
-
-          let getQuestion = async () => {
-            const responseQuestions = await getQuestions()
-            const question = responseQuestions
-            const correct = question.correctAnswer;
-            console.log(correct)
-            localStorage.setItem('correctAnswer', correct);
-            const questionToAsk = {
-            question: question.question,
-            a: question.a,
-            b: question.b,
-            c: question.c,
-            d: question.d
-            }
-          return questionToAsk   
-        }
 
         let timeleft = 10;
         let downloadTimer = setInterval(function(){
@@ -149,13 +61,13 @@
             clearInterval(downloadTimer);
             domElements.querySelector("h3").innerHTML = "Zeit ist aus";
         } else {
-            domElements.querySelector("h3").innerHTML = timeleft + " Sekunden verbleibend";
+            domElements.querySelector("h3").innerHTML = timeleft + " Sekunden";
         }
         timeleft -= 1;
         }, 1000);
 
         async function getAllQuestions(){
-            let randomQuestion = await getQuestion()
+            let randomQuestion = await askQuestion()
             domElements.querySelector('h4').innerHTML = randomQuestion.question
             domElements.querySelectorAll('li')[0].innerHTML = 'A: ' +randomQuestion.a
             domElements.querySelectorAll('li')[1].innerHTML = 'B: ' +randomQuestion.b
@@ -190,13 +102,13 @@
         return domElements
 
         }
-
+        
         import { answerQuestion } from '/quiz.js'
         const answerTemplate = () => {
             const domElements = html(`
             <section>
             <h1 class="mb-5 mt-5"></h1>
- 
+            <div></div>
             <div class="container center"> 
                 <h2></h2> 
                 <h4 class="mb-2"></h4>
@@ -215,13 +127,17 @@
 
             function callCorrect(){
               domElements.querySelector("h1").innerHTML = 'Deine Antwort ist richtig!'
+              domElements.querySelectorAll("div")[0].innerHTML = '<div class="parentDivLottie"><div id="successLottie"  class="childDivLottie"><lottie-player src="https://assets5.lottiefiles.com/temp/lf20_MqU2rh.json" background="transparent"  speed="1.5"  style="width: 250px; height: 250px;" autoplay></lottie-player></div></div>'
             }
 
             function callFalse(){
               if(choosen === ''){
                 domElements.querySelector("h1").innerHTML = 'Das war wohl zu langsam..'
+                domElements.querySelectorAll("div")[0].innerHTML = '<div class="parentDivLottie"><div id="slowLottie"  class="childDivLottie"><lottie-player id="slowLottie" src="https://assets2.lottiefiles.com/packages/lf20_jryyrscd.json" background="transparent"  speed="1"  style="width: 350px; height: 350px;" autoplay></lottie-player></div></div>'
               } else{
                 domElements.querySelector("h1").innerHTML = 'Deine Antwort ist leider falsch..'
+                domElements.querySelectorAll("div")[0].innerHTML = '<div class="parentDivLottie"><div id="failLottie"  class="childDivLottie"><lottie-player id="failLottie" src="https://assets5.lottiefiles.com/private_files/lf30_jq4i7W.json" background="transparent"  speed="1"  style="width: 300px; height: 300px;" autoplay></lottie-player></div></div>'
+                
               }
             }
 

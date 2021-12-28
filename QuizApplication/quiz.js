@@ -1,23 +1,22 @@
 import { getQuestions } from "./questions.js";
 
-export async function askQuestion() {
+export const askQuestion = async () => {
     try{
         const responseQuestions = await getQuestions()
-        const question = responseQuestions   
+        const question = responseQuestions
+        const correct = question.correctAnswer;
+        console.log(correct)
+        localStorage.setItem('correctAnswer', correct);
         const questionToAsk = {
             question: question.question,
             a: question.a,
             b: question.b,
             c: question.c,
             d: question.d
-        }
-        const questionCorrectAnswer = {
-            correctAnswer: question.correctAnswer
-        }
-        console.log(questionToAsk)
-        return questionCorrectAnswer
-    } catch(err){
-        console.log(err)
+        } 
+        return questionToAsk   
+    }catch(e){
+        console.log(e)
     }
 }
 
