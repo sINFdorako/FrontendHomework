@@ -200,7 +200,86 @@ export const questions = [{
         c: 'George Washington',
         d: 'John Adams'
     },
-    
+    {
+        question: 'Welche Adresse ist mit Sherlock Holmes verbunden?',
+        correctAnswer: '221b Baker Street',
+        a: 'Downing Street 10',
+        b: 'Abbey Road 42',
+        c: '221b Baker Street',
+        d: 'Princess Street 7'
+    },
+    {
+        question: 'Wie lautet das chemische Symbol für Blei?',
+        correctAnswer: 'Pb',
+        a: 'Bl',
+        b: 'Pb',
+        c: 'Be',
+        d: 'Pt'
+    },
+    {
+        question: 'Wie viele Planeten hat unser Sonnensystem?',
+        correctAnswer: '8',
+        a: '8',
+        b: '9',
+        c: '10',
+        d: '11'
+    },
+    {
+        question: 'In welchem Meer liegt die Insel Hawaii?',
+        correctAnswer: 'Pazifischer Ozean',
+        a: 'Atlantischer Ozean',
+        b: 'Indischer Ozean',
+        c: 'Karibisches Meer',
+        d: 'Pazifischer Ozean'
+    },
+    {
+        question: 'Welchen Namen trägt die Universität Frankfurt am Main?',
+        correctAnswer: 'Johann Wolfgang von Goethe',
+        a: 'Friedrich Schiller',
+        b: 'Bertolt Brecht',
+        c: 'Johann Wolfgang von Goethe',
+        d: 'Heinrich Heine'
+    },
+    {
+        question: 'Wer verbreitete das heliozentrische Weltbild?',
+        correctAnswer: 'Nikolaus Kopernikus',
+        a: 'Galileo Galilei',
+        b: 'Nikolaus Kopernikus',
+        c: 'Leonardo da Vinci',
+        d: 'Aristoteles'
+    },
+    {
+        question: 'An welchem Datum fiel die Berliner Mauer?',
+        correctAnswer: '9. November 1989',
+        a: '3. Oktober 1990',
+        b: '2. November 1990',
+        c: '9. November 1989',
+        d: '8. Oktober 1989'
+    },
+    {
+        question: 'Was ist ein Sonett?',
+        correctAnswer: 'Eine Gedichtsform',
+        a: 'Eine Stichwaffe',
+        b: 'Ein Musikinstrument',
+        c: 'Ein Pilz',
+        d: 'Eine Gedichtsform'
+    },
+    {
+        question: 'Wie heißt die Schicht der Atmosphäre, die der Erde am nächsten ist?',
+        correctAnswer: 'Troposphäre',
+        a: 'Troposphäre',
+        b: 'Stratosphäre',
+        c: 'Mesosphäre',
+        d: 'Thermosphäre'
+    },
+    {
+        question: 'Wer spielt die Hauptrolle im Film „Einer flog über das Kuckucksnest“?',
+        correctAnswer: 'Jack Nicholson',
+        a: 'Robert de Niro',
+        b: 'Jack Nicholson',
+        c: 'Mel Gibson',
+        d: 'Tom Hanks'
+    },
 ]
 
 export const getQuestions = async () => {
