@@ -10,6 +10,7 @@ h1{
     background-color:rgba(0, 0, 0, 0.637);
     background-image: url('/assets/quiz_background.png');
     background-attachment: inherit;
+    background-size: cover;
     background-blend-mode: soft-light;
     background-position: top center;
   }
